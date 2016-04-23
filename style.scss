@@ -1,0 +1,31 @@
+body, html {
+	background-color: black;
+	height:100%;
+}
+
+
+$header_height: 50px;
+header {
+	height: $header_height;
+	color: white;
+	background-color: #005ea5;
+
+	h1 {
+		font-family: "nta", Arial, sans-serif;
+	    padding: 15px;
+	    font-size: 120%;
+	    font-weight: bold;
+	}
+
+}
+
+.container {
+	height: calc(100% - #{$header_height});
+    box-sizing: border-box;
+    padding: 20px;
+
+	#remotevideo {
+		width: 100%;
+		max-height: 100%;
+	}
+}
