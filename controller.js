@@ -4,6 +4,10 @@ $(document).ready(function() {
 });
 
 function Controller() {
+	$("#details-toggle").click(this.toggleDetails.bind(this));
+	$("#send").click(this.sendData.bind(this));
+	this.RETRY_DELAY = 2000;
+
 	Janus.init({debug: "all", callback: this.onJanusInit.bind(this)});
 }
 
@@ -26,14 +30,16 @@ Controller.prototype.onJanusInit = function() {
 		success: this.onSessionSuccess.bind(this),
 		error: function(error) {
 			Janus.error(error);
-		},
+			Janus.error("Retrying in " + this.RETRY_DELAY + " milliseconds");
+			setTimeout(function() {
+				this.onJanusInit();
+			}.bind(this), this.RETRY_DELAY);
+		}.bind(this),
 		destroyed: function() {
 			window.location.reload();
 		}
 	});
 
-
-	$("#send").click(this.sendData.bind(this));
 };
  
 Controller.prototype.onSessionSuccess = function() {
@@ -49,7 +55,7 @@ Controller.prototype.onSessionSuccess = function() {
 			ondataopen: function(data) {},
 			ondata: this.onData.bind(this),
 			onremotestream: function(stream) {
-				attachMediaStream($('#remotevideo').get(0), stream);
+				attachMediaStream($('#video').get(0), stream);
 			},
 			oncleanup: function() {}
 		});
@@ -111,9 +117,9 @@ Controller.prototype.stopStream = function() {
 
 Controller.prototype.handleStatus = function(status) {
 	if(status === 'starting')
-		$('#status').removeClass('hide').text("Starting, please wait...").show();
+		$('#video-status').removeClass('hide').text("Starting...").show();
 	else if(status === 'started')
-		$('#status').removeClass('hide').text("Started").show();
+		$('#video-status').addClass('hide').show();
 	else if(status === 'stopped')
 		this.stopStream();
 }
@@ -140,4 +146,9 @@ Controller.prototype.sendData = function() {
 		error: function(reason) { bootbox.alert(reason); },
 		success: function() { $('#datasend').val(''); },
 	});
+}
+
+Controller.prototype.toggleDetails = function() {
+	$("#video-col").toggleClass("col-md-12").toggleClass("col-md-8");
+	$("#details-col").toggle();
 }

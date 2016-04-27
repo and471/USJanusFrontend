@@ -1,8 +1,22 @@
+$spacing: 15px;
+
 body, html {
 	background-color: black;
 	height:100%;
 }
 
+body {
+	display: flex;
+	flex-direction: column;
+}
+
+.table-no-border td, .table-no-border th {
+	border: none !important
+}
+
+.dark-border {
+	border: 1px solid #333;
+}
 
 $header_height: 50px;
 header {
@@ -12,20 +26,60 @@ header {
 
 	h1 {
 		font-family: "nta", Arial, sans-serif;
-	    padding: 15px;
-	    font-size: 120%;
+	    padding: $spacing;
 	    font-weight: bold;
 	}
 
 }
 
-.container {
-	height: calc(100% - #{$header_height});
-    box-sizing: border-box;
-    padding: 20px;
+.main {
+	flex-grow:1;
+	width:100%;
+	display: flex;
+	flex-direction: column;
 
-	#remotevideo {
-		width: 100%;
-		max-height: 100%;
+	#content {
+		margin: $spacing 0;
+		flex-grow: 1;
 	}
+
+	#debug {
+		padding: $spacing;
+	}
+
+    #video-wrapper {
+        box-sizing: border-box;
+    	padding: $spacing;
+    	height:100%;
+    	position: relative;
+
+    	#video-status {
+    	   	position: absolute;
+		    top: 50%;
+		    left: 0;
+		    width: 100%;
+		    text-align: center;
+		    color: white;
+		    opacity: 0.8;
+    	}
+
+    	#video {
+			width: 100%;
+			max-height: 100%;
+    	}
+    }
+
+    #details {
+    	color: white;
+        box-sizing: border-box;
+    	padding: $spacing;
+    	height:100%;
+	    border-radius: 3px;
+
+	    #details-toggle {
+	    	float:right;
+	    }
+    }
+
+	
 }
