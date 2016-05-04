@@ -2,7 +2,8 @@ $spacing: 15px;
 
 body, html {
 	background-color: black;
-	height:100%;
+	height: 100%;
+	font-family: sans-serif;
 }
 
 body {
@@ -12,10 +13,6 @@ body {
 
 .table-no-border td, .table-no-border th {
 	border: none !important
-}
-
-.dark-border {
-	border: 1px solid #333;
 }
 
 $header_height: 50px;
@@ -71,10 +68,7 @@ header {
 
     #details {
     	color: white;
-        box-sizing: border-box;
-    	padding: $spacing;
-    	height:100%;
-	    border-radius: 3px;
+    	height: 100%;
 
 	    #details-toggle {
 	    	float:right;
@@ -82,4 +76,59 @@ header {
     }
 
 	
+}
+
+#image-controls {
+
+	
+
+	
+}
+
+.pill {
+	border: 1px solid #333;
+	border-radius: 3px;
+	box-sizing: border-box;
+
+	h2 {
+		font-weight: bold;
+		border-radius: 3px 3px 0px 0px;
+		border-bottom: 1px solid #333;
+    	text-transform: uppercase;
+    	color: white;
+		padding: $spacing+3 $spacing $spacing $spacing;
+		width: 100%;
+		background-color: #1F1F1F;
+    }
+
+    table {
+    	margin-bottom: 0  !important;
+
+		td, th {
+			padding: $spacing !important;
+		}
+	}
+}
+
+.pill--vertical {
+	margin-top: $spacing;
+
+	&:first-child {
+		margin-top: 0;
+	}
+}
+
+.range-value-control {
+	display: flex;
+	padding: $spacing;
+
+	input[type=range] {
+		flex-grow: 1;
+		margin-right: 20px;
+	}
+
+	input[type=number] {
+		flex-grow: 0;
+		width: 50px;
+	}
 }
