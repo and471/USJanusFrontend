@@ -1,6 +1,9 @@
 
 $(document).ready(function() {
 	controller = new Controller();
+
+
+	setupTests();
 });
 
 function Controller() {
@@ -188,6 +191,10 @@ Controller.prototype.onNSlicesChanged = function(nSlices) {
 Controller.prototype.onSliceChanged = function() {
 	var slice = this.sliceControl.val();
 	this.sendData({"method": "SET_SLICE", "data":{"slice": slice}});
+
+	$("body").css("background-color", "#313131");
+	setTimeout(function() { $("body").css("background-color", "#000"); } , 100);
+
 }
 
 
@@ -209,13 +216,19 @@ function RangeValueControl(container) {
 }
 
 RangeValueControl.prototype.onRangeChange = function() {
-	this.number.val(this.range.val());
-	if (this.changeCallback) this.changeCallback();
+
+	setTimeout(function() {
+		this.number.val(this.range.val());
+		if (this.changeCallback) this.changeCallback();
+	}.bind(this), DELAY);
+
 }
 
 RangeValueControl.prototype.onNumberChange = function() {
-	this.range.val(this.number.val());
-	if (this.changeCallback) this.changeCallback();
+	setTimeout(function() {
+		this.range.val(this.number.val());
+		if (this.changeCallback) this.changeCallback();
+	}.bind(this), DELAY);
 }
 
 RangeValueControl.prototype.change = function(cb) {
