@@ -61,6 +61,7 @@ Controller.prototype.onSessionSuccess = function() {
 			onmessage: this.onPluginMessage.bind(this),
 			ondataopen: function(data) {
 				this.plugin.send({"message": {"request": "ready"}});
+				$("#details-col").removeClass("disabled");
 			}.bind(this),
 			ondata: this.onData.bind(this),
 			onremotestream: function(stream) {
@@ -75,7 +76,7 @@ Controller.prototype.onPluginSuccess = function(plugin) {
 	Janus.log("Plugin attached! (" + plugin.getPlugin() + ", id=" + plugin.getId() + ")");
 
 	// Setup ultrasound session
-	this.plugin.send({"message": {"request": "list"}, success: function(result) {
+	/*this.plugin.send({"message": {"request": "list"}, success: function(result) {
 		if (result["list"] == undefined || result["list"] == null) {
 			Janus.error("Response was empty");
 			return;
@@ -86,13 +87,13 @@ Controller.prototype.onPluginSuccess = function(plugin) {
 			Janus.error(result["list"]);
 			return;
 		}
-
+*/
 		this.startStream();
-	}.bind(this)});
+	/*}.bind(this)});
 
 	$('#stop').click(function() {
 		stopStream();
-	});
+	});*/
 }
 
 Controller.prototype.onPluginMessage = function(msg, jsep) {
@@ -123,7 +124,12 @@ Controller.prototype.onData = function(data_str) {
 }
 
 Controller.prototype.startStream = function() {
-	this.plugin.send({"message": {"request": "watch", id: 1}});
+	this.plugin.send({"message": {
+		"request": "watch", 
+		"auth": {
+			"secret": "password"
+		}
+	}});
 }
 
 Controller.prototype.stopStream = function() {

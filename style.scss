@@ -78,6 +78,12 @@ header {
 	
 }
 
+#details-col {
+	&.disabled {
+		opacity: 0.2;
+	}
+}
+
 #image-controls {
 
 	
