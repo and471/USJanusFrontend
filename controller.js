@@ -4,6 +4,11 @@ $(document).ready(function() {
 });
 
 function Controller() {
+	this.snapshot_controller = new SnapshotController();
+
+	$("#take-snapshot").click(this.onTakeSnapshotClicked.bind(this));
+
+
 	$("#details-toggle").click(this.toggleDetails.bind(this));
 	$("#send").click(function() {
 		this.sendData.apply(this, [$('#datasend').val()])
@@ -188,6 +193,21 @@ Controller.prototype.onNSlicesChanged = function(nSlices) {
 Controller.prototype.onSliceChanged = function() {
 	var slice = this.sliceControl.val();
 	this.sendData({"method": "SET_SLICE", "data":{"slice": slice}});
+}
+
+Controller.prototype.onTakeSnapshotClicked = function() {
+	var img = this.snapshot_controller.snapshot($('#video').get(0), $('#video').get(0).videoWidth, $('#video').get(0).videoHeight);
+
+	var container = $("<div></div>").addClass("snapshot-container")
+	                                .append(img);
+
+	img.click(function() {
+		var a = $("<a></a>").attr("href", img.data("dataURL"))
+					        .attr("download", img.data("filename"));
+		a.get(0).click();
+	})
+
+	$("#snapshots-container").append(container);
 }
 
 

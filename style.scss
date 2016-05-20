@@ -82,6 +82,9 @@ header {
 	&.disabled {
 		opacity: 0.2;
 	}
+
+	display: flex;
+    flex-direction: column;
 }
 
 #image-controls {
@@ -137,4 +140,33 @@ header {
 		flex-grow: 0;
 		width: 50px;
 	}
+}
+
+#take-snapshot {
+	float:right;
+	color: white !important;
+	text-decoration: none !important;
+}
+
+.snapshot-container {
+	width: 145px;
+	height: 90px;
+	margin: $spacing;
+
+	.image {
+		width: 100%;
+		height: 100%;
+		background-repeat:no-repeat;
+    	background-size:contain;
+	}
+
+	&:hover {
+		cursor: pointer;
+	}
+}
+
+#snapshots-container {
+	flex-grow: 1;
+	display: flex;
+	flex-wrap: wrap;
 }

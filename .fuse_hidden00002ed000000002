@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>Ultrasound Streaming</title>
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="reset.css">
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <script type="text/javascript" src="jquery.min.js" ></script>
+  <script type="text/javascript" src="janus.js" ></script>
+  <script type="text/javascript" src="controller.js"></script>
+  <script type="text/javascript" src="test.js"></script>
+</head>
+<body>
+
+  <div class="main container-fluid">
+    <div id="content" class="row">
+      <div id="video-col" class="col-md-8">
+        <div id="video-wrapper" class="pill">
+          <p id="video-status">No ultrasound stream detected.</p>
+          <video id="video" autoplay/>
+        </div>
+      </div>
+      <div id="details-col" class="col-md-4 disabled">
+        <div id="details" class="pill pill--vertical">
+          
+        <h2>Details</h2>
+
+          <div class="patient-details">
+            <table class="table table-no-border">
+              <tbody>
+                <tr>
+                  <td>Patient Name</td>
+                  <td id="detail-patient-name"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div id="image-controls" class="pill pill--vertical">
+          <h2>Image Controls</h2>
+          
+          <div id="slice-controls">
+
+
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="row">
+                
+      <div id="debug" class="bg-info col-md-12" style="display:flex; flex-direction:row">
+        
+        <div style="display:flex; flex-direction:row; padding-right:30px">
+        <p style="padding-right:10px; line-height:28px">1)</p>
+        <select id="delay">
+          <option value="0">none</option>          
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+        </select>
+        </div>
+
+        <div style="display:flex; flex-direction:row; padding-right:30px">
+        <p style="padding-right:10px; line-height:28px">2)</p>
+        <select id="quality">
+          <option value="0">none</option>          
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+        </select>
+        </div>
+
+        <div style="display:flex; flex-direction:row; padding-right:30px">
+        <p style="padding-right:10px; line-height:28px">3)</p>
+        <select id="framerate">
+          <option value="0">none</option>          
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+        </select>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

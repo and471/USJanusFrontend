@@ -18,5 +18,11 @@ SnapshotController.prototype.snapshot = function(video, width, height) {
     // Draw image
 	context.drawImage(video, 0, 0, width, height);
 
-	return $("<img/>").attr("src", canvas.toDataURL("image/png"));
+
+	var data = this.canvas.toDataURL("image/png");
+	return $("<div/>").addClass("image")
+					  .data("width", width).data("height", height)
+	                  .data("dataURL", data)
+	                  .css("background-image", "url(" + data + ")")
+	                  .data("filename", new Date().toLocaleString());
 };
