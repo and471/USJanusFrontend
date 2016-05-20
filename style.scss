@@ -1,4 +1,5 @@
 $spacing: 15px;
+$phoneWidth: 768px;
 
 body, html {
 	background-color: black;
@@ -29,15 +30,44 @@ header {
 
 }
 
-.main {
-	flex-grow:1;
-	width:100%;
+#main {
+	flex-grow: 1;
+	width: 100%;
 	display: flex;
 	flex-direction: column;
+	padding: $spacing;
+	height: 100%;
 
 	#content {
-		margin: $spacing 0;
+		height: 100%;
 		flex-grow: 1;
+		display: flex;
+
+		@media only screen and (max-width: $phoneWidth) {
+    		flex-direction: column;
+		}
+
+		#video-col {			
+			display:flex;
+			flex-grow: 2;
+			margin-right: $spacing;
+
+			@media only screen and (max-width: $phoneWidth) {
+				flex-grow: 0;
+    			margin-right: 0;
+			}
+		}
+
+		#details-col {
+			flex-grow: 1;
+			max-width: 400px;
+			display: flex;
+
+			@media only screen and (max-width: $phoneWidth) {
+    			margin-top: $spacing;
+    			max-width: none;
+			}
+		}
 	}
 
 	#debug {
@@ -47,8 +77,11 @@ header {
     #video-wrapper {
         box-sizing: border-box;
     	padding: $spacing;
-    	height:100%;
+    	flex-grow: 1;
     	position: relative;
+    	display: flex;
+	    flex-direction: column;
+	    justify-content: center;
 
     	#video-status {
     	   	position: absolute;
@@ -162,11 +195,19 @@ header {
 
 	&:hover {
 		cursor: pointer;
+		opacity: 0.7;
 	}
 }
 
-#snapshots-container {
+#snapshots {
 	flex-grow: 1;
-	display: flex;
-	flex-wrap: wrap;
+	overflow: auto;
+
+	#snapshots-container {
+		flex-grow: 1;
+		display: flex;
+		flex-wrap: wrap;
+	}
+
 }
+
