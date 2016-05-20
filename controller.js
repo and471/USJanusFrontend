@@ -192,8 +192,8 @@ Controller.prototype.onSliceChanged = function() {
 	var slice = this.sliceControl.val();
 	this.sendData({"method": "SET_SLICE", "data":{"slice": slice}});
 
-	$("body").css("background-color", "#313131");
-	setTimeout(function() { $("body").css("background-color", "#000"); } , 100);
+	$("#video-wrapper").css("background-color", "#313131");
+	setTimeout(function() { $("#video-wrapper").css("background-color", "#000"); } , 100);
 
 }
 
