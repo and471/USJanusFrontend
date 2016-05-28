@@ -14,8 +14,14 @@ function Controller() {
 		this.sendData.apply(this, [$('#datasend').val()])
 	}.bind(this));
 
-	this.sliceControl = new RangeValueControl($("#slice-controls"));
+	this.sliceControl = new RangeValueControl($("#slice-control"), "3D Slice");
 	this.sliceControl.change(this.onSliceChanged.bind(this));
+
+	this.zoomControl = new RangeControl($("#zoom-control"), "Zoom");
+	this.zoomControl.setMinMax(0.5, 4);
+	this.zoomControl.setStep(0.1);
+	this.zoomControl.setVal(1);
+	this.zoomControl.change(this.onZoomChanged.bind(this));
 
 	this.RETRY_DELAY = 2000;
 
@@ -195,6 +201,11 @@ Controller.prototype.onSliceChanged = function() {
 	this.sendData({"method": "SET_SLICE", "data":{"slice": slice}});
 }
 
+Controller.prototype.onZoomChanged = function() {
+	var zoom = this.zoomControl.val();
+	$("#video").css("transform", "scale(" + zoom + ")");
+}
+
 Controller.prototype.onTakeSnapshotClicked = function() {
 	var img = this.snapshot_controller.snapshot($('#video').get(0), $('#video').get(0).videoWidth, $('#video').get(0).videoHeight);
 
@@ -211,19 +222,17 @@ Controller.prototype.onTakeSnapshotClicked = function() {
 }
 
 
-function RangeValueControl(container) {
+function RangeValueControl(container, label) {
 	this.container = container;
 
 	this.container.addClass("range-value-control");
 
+	this.container.append($("<span></span>").text(label));
 	this.range = $("<input type='range'/>").appendTo($(container));
 	this.number = $("<input type='number'/>").appendTo($(container));
 
 	this.range.change(this.onRangeChange.bind(this));
 	this.number.change(this.onNumberChange.bind(this));
-
-	this.range.val(0);
-	this.number.val(0);
 
 	this.changeCallback = null;
 }
@@ -242,8 +251,13 @@ RangeValueControl.prototype.change = function(cb) {
 	this.changeCallback = cb;
 }
 
+RangeValueControl.prototype.setVal = function(val) {
+	this.range.val(val);
+	this.number.val(val);
+}
+
 RangeValueControl.prototype.val = function() {
-	return parseInt(this.number.val(), 10);
+	return parseFloat(this.number.val(), 10);
 }
 
 RangeValueControl.prototype.setMinMax = function(min, max) {
@@ -252,6 +266,47 @@ RangeValueControl.prototype.setMinMax = function(min, max) {
 }
 
 RangeValueControl.prototype.setVisible = function(visible) {
+	if (visible) this.container.show();
+	else         this.container.hide();
+}
+
+
+function RangeControl(container, label) {
+	this.container = container;
+	this.container.addClass("range-control");
+
+	this.container.append($("<span></span>").text(label));
+	this.range = $("<input type='range'/>").appendTo($(container));
+	this.range.on("input", this.onRangeChange.bind(this));
+
+	this.changeCallback = null;
+}
+
+RangeControl.prototype.onRangeChange = function() {
+	if (this.changeCallback) this.changeCallback();
+}
+
+RangeControl.prototype.change = function(cb) {
+	this.changeCallback = cb;
+}
+
+RangeControl.prototype.setVal = function(val) {
+	this.range.val(val);
+}
+
+RangeControl.prototype.val = function() {
+	return parseFloat(this.range.val(), 10);
+}
+
+RangeControl.prototype.setMinMax = function(min, max) {
+	this.range.attr("min", min).attr("max", max);
+}
+
+RangeControl.prototype.setStep = function(step) {
+	this.range.attr("step", step);
+}
+
+RangeControl.prototype.setVisible = function(visible) {
 	if (visible) this.container.show();
 	else         this.container.hide();
 }

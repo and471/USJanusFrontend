@@ -22,6 +22,17 @@
           <p id="video-status">No ultrasound stream detected.</p>
     		  <video id="video" autoplay/>
         </div>
+
+      <div id="snapshots" class="pill pill--vertical">
+        <h2>Image Snapshots  <a href="#" id="take-snapshot">&#10133;</a></h2>
+        
+
+        <div id="snapshots-container" class="horizontal-scroll">
+        </div>
+
+      </div>
+
+
       </div>
       <div id="details-col" class=" disabled">
         <div id="details" class="pill pill--vertical">
@@ -43,28 +54,25 @@
         <div id="image-controls" class="pill pill--vertical">
           <h2>Image Controls</h2>
           
-          <div id="slice-controls">
+          <div id="slice">
+            <div id="slice-control"></div>
+          </div>
 
-
-
+          <div id="zoom">
+            <div id="zoom-control"></div>
           </div>
 
         </div>
 
-        <div id="snapshots" class="pill pill--vertical">
-          <h2>Image Snapshots  <a href="#" id="take-snapshot">&#10133;</a></h2>
-          
 
-          <div id="snapshots-container">
-
-          </div>
-
-        </div>
 
 
 
       </div>
+
+
     </div>
+
 	</div>
 
 </body>
