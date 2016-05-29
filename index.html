@@ -11,7 +11,13 @@
   <script type="text/javascript" src="jquery.min.js" ></script>
   <script type="text/javascript" src="janus.js" ></script>
   <script type="text/javascript" src="controller.js"></script>
+  <script type="text/javascript" src="range.js"></script>
   <script type="text/javascript" src="snapshot.js"></script>
+
+  <script src="probe.js"></script>
+  <script src="viewer/three.js"></script>
+  <script src="viewer/ColladaLoader.js"></script>
+
 </head>
 <body>
 
@@ -62,6 +68,11 @@
             <div id="zoom-control"></div>
           </div>
 
+        </div>
+
+        <div id="probe-visualisation" class="pill pill--vertical">
+          <h2>Probe Position and Force</h2>
+          <div id="probe"></div>
         </div>
 
 
